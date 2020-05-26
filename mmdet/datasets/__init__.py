@@ -6,6 +6,7 @@ from .dataset_wrappers import (ClassBalancedDataset, ConcatDataset,
                                RepeatDataset)
 from .samplers import DistributedGroupSampler, DistributedSampler, GroupSampler
 from .voc import VOCDataset
+from .ghd import GHDDataset
 from .wider_face import WIDERFaceDataset
 from .xml_style import XMLDataset
 
@@ -14,5 +15,6 @@ __all__ = [
     'CityscapesDataset', 'GroupSampler', 'DistributedGroupSampler',
     'DistributedSampler', 'build_dataloader', 'ConcatDataset', 'RepeatDataset',
     'ClassBalancedDataset', 'WIDERFaceDataset', 'DATASETS', 'PIPELINES',
+    'GHDDataset',
     'build_dataset'
 ]
