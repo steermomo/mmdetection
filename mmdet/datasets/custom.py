@@ -154,6 +154,9 @@ class CustomDataset(Dataset):
             results['proposals'] = self.proposals[idx]
         self.pre_pipeline(results)
         return self.pipeline(results)
+        # ret = self.pipeline(results)
+        # print(ret.keys())
+        # return ret
 
     def prepare_test_img(self, idx):
         img_info = self.data_infos[idx]
