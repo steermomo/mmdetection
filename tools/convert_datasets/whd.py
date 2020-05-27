@@ -34,11 +34,14 @@ def convert_to_mmdect_middle(df : pd.DataFrame):
             # https://github.com/open-mmlab/mmdetection/blob/master/docs/compatibility.md
             # 从0开始
             # assert bbox[2] + bbox[0] < width and bbox[3] + bbox[1] < height, f'{bbox}, {width, height}'
-            bbox[2] = max(bbox[2], width - bbox[0])
-            bbox[3] = max(bbox[3], height - bbox[1])
-            assert bbox[0] >= 0 and bbox[1] >= 0
+            # bbox[2] = max(bbox[2], width - bbox[0])
+            # bbox[3] = max(bbox[3], height - bbox[1])
+            # assert bbox[0] >= 0 and bbox[1] >= 0
             # bbox[2] = bbox[2] - 1
             # bbox[3] = bbox[3] - 1
+            # 这里需要制定的是对角线坐标
+            bbox[2] = bbox[0] + bbox[2]
+            bbox[3] = bbox[1] + bbox[3]
             bboxes.append(bbox)
             # print(bbox)
         
@@ -104,7 +107,7 @@ if __name__ == "__main__":
 
     dataset_dir = '/mnt/d/Dataset/ghd'
     dataset_dir = '/Users/steer/Documents/dataset/global-wheat-detection'
-    dataset_dir = '/data1/hangli/gwd/data'
+    # dataset_dir = '/data1/hangli/gwd/data'
 
     train_csv_fp = osp.join(dataset_dir, 'train.csv')
     kfold_split(train_csv_fp)

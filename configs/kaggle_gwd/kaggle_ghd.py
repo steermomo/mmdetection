@@ -19,6 +19,7 @@ total_epochs = 12
 dataset_type = 'GHDDataset'
 data_root = '/mnt/d/Dataset/ghd'
 data_root = '/data1/hangli/gwd/data'
+data_root = '/Users/steer/Documents/dataset/global-wheat-detection'
 tr_img_prefix = 'train'
 classes = None
 img_norm_cfg = dict(

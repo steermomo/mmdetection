@@ -21,4 +21,5 @@ class GHDDataset(CustomDataset):
         # return self.data_infos[idx]['ann']
         ret = self.data_infos[idx]['ann']
         ret['bboxes'] = ret['bboxes'].astype(np.float32)
+        ret['labels'] = ret['labels'].astype(np.int64)
         return ret
