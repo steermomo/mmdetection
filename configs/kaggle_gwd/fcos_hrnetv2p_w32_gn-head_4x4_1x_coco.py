@@ -123,5 +123,6 @@ data = dict(
 
 fp16 = dict(loss_scale=512.)
 
+evaluation = dict(interval=1, metric='mAP')
 lr_config = dict(step=[16, 22])
 total_epochs = 30
