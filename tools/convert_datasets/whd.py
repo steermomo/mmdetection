@@ -20,9 +20,8 @@ class NDArrayEncoder(json.JSONEncoder):
             return obj.tolist()
         return json.JSONEncoder.default(self, obj)
 
-def convert_to_mmdect_middle(df: pd.DataFrame):
+def convert_to_mmdect_middle(df : pd.DataFrame):
     data_list = []
-    
     df_grouped = df.groupby('image_id')
     for image_id, group_data in tqdm(df_grouped):
         bboxes = []
@@ -93,6 +92,7 @@ if __name__ == "__main__":
     annot_path = '/mnt/d/Dataset/ghd/fold0_train.csv'
 
     dataset_dir = '/mnt/d/Dataset/ghd'
+    dataset_dir = '/Users/steer/Documents/dataset/global-wheat-detection'
     train_csv_fp = osp.join(dataset_dir, 'train.csv')
     kfold_split(train_csv_fp)
 
