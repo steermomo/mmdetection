@@ -8,14 +8,17 @@ from .custom import CustomDataset
 @DATASETS.register_module()
 class GHDDataset(CustomDataset):
 
-    CLASSES = ('wheat')
+    CLASSES = ('wheat',)
 
     def load_annotations(self, ann_file):
-
+        print(f'=>>. load {ann_file}')
         with open(ann_file, 'rb') as infile:
             anno_info = pickle.load(infile)
         # ann_list = mmcv.list_from_file(ann_file)
         return anno_info
 
     def get_ann_info(self, idx):
-        return self.data_infos[idx]['ann']
+        # return self.data_infos[idx]['ann']
+        ret = self.data_infos[idx]['ann']
+        ret['bboxes'] = ret['bboxes'].astype(np.float32)
+        return ret

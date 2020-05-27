@@ -147,6 +147,15 @@ def main():
             CLASSES=datasets[0].CLASSES)
     # add an attribute for visualization convenience
     model.CLASSES = datasets[0].CLASSES
+    # with torch.autograd.detect_anomaly():
+    #     train_detector(
+    #     model,
+    #     datasets,
+    #     cfg,
+    #     distributed=distributed,
+    #     validate=(not args.no_validate),
+    #     timestamp=timestamp,
+    #     meta=meta)
     train_detector(
         model,
         datasets,

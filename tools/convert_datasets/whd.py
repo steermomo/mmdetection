@@ -31,17 +31,28 @@ def convert_to_mmdect_middle(df: pd.DataFrame):
             __, width, height, bbox, source = row_data
             # print(type(bbox))
             bbox = eval(bbox)  # convert str to list object
+
+            # https://github.com/open-mmlab/mmdetection/blob/master/docs/compatibility.md
+            # 从0开始
+            # assert bbox[2] + bbox[0] < width and bbox[3] + bbox[1] < height, f'{bbox}, {width, height}'
+            bbox[2] = max(bbox[2], width - bbox[0])
+            bbox[3] = max(bbox[3], height - bbox[1])
+            assert bbox[0] >= 0 and bbox[1] >= 0
+            # bbox[2] = bbox[2] - 1
+            # bbox[3] = bbox[3] - 1
             bboxes.append(bbox)
             # print(bbox)
         
+        # https://github.com/open-mmlab/mmdetection/blob/master/docs/compatibility.md
+        # In MMDetection 2.0, label "K" means background, and labels [0, K-1] correspond to the K = num_categories object categories.
         ant_dict = {
             'filename': f'{image_id}.jpg',
             'width': width,
             'height': height,
             'ann': {
                 'bboxes': np.array(bboxes),
-                # 'bboxes': bboxes,
-                'labels': np.ones(len(bboxes)),
+                'labels': np.zeros(len(bboxes)).astype(np.int64),
+                # 'labels': np.ones(len(bboxes)).astype(np.int64),
             },
             'source': source
         }
@@ -93,6 +104,7 @@ if __name__ == "__main__":
     annot_path = '/mnt/d/Dataset/ghd/fold0_train.csv'
 
     dataset_dir = '/mnt/d/Dataset/ghd'
+    dataset_dir = '/data1/hangli/gwd/data'
     train_csv_fp = osp.join(dataset_dir, 'train.csv')
     kfold_split(train_csv_fp)
 
