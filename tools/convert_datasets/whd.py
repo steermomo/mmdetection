@@ -107,7 +107,7 @@ if __name__ == "__main__":
 
     dataset_dir = '/mnt/d/Dataset/ghd'
     dataset_dir = '/Users/steer/Documents/dataset/global-wheat-detection'
-    # dataset_dir = '/data1/hangli/gwd/data'
+    dataset_dir = '/data1/hangli/gwd/data'
 
     train_csv_fp = osp.join(dataset_dir, 'train.csv')
     kfold_split(train_csv_fp)

@@ -19,7 +19,7 @@ total_epochs = 12
 dataset_type = 'GHDDataset'
 data_root = '/mnt/d/Dataset/ghd'
 data_root = '/data1/hangli/gwd/data'
-data_root = '/Users/steer/Documents/dataset/global-wheat-detection'
+# data_root = '/Users/steer/Documents/dataset/global-wheat-detection'
 tr_img_prefix = 'train'
 classes = None
 img_norm_cfg = dict(
@@ -104,7 +104,7 @@ model = dict(
                 type='CrossEntropyLoss', use_sigmoid=True, loss_weight=1.0),
             loss_bbox=dict(type='L1Loss', loss_weight=1.0))))
 data = dict(
-    samples_per_gpu=4,
+    samples_per_gpu=8,
     workers_per_gpu=2,
     train=dict(
         type=dataset_type,
@@ -130,3 +130,5 @@ data = dict(
         pipeline=test_pipeline,
         ann_file='fold0_val.pkl',
         ))
+
+fp16 = dict(loss_scale=512.)

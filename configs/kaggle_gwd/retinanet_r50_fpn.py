@@ -5,6 +5,7 @@ _base_ = [
     '../_base_/default_runtime.py',
     '../_base_/schedules/schedule_1x.py'
 ]
+total_epochs = 40
 dataset_type = 'GHDDataset'
 data_root = '/mnt/d/Dataset/ghd'
 data_root = '/data1/hangli/gwd/data'
@@ -81,8 +82,8 @@ model = dict(
             loss_weight=1.0),
         loss_bbox=dict(type='L1Loss', loss_weight=1.0)))
 data = dict(
-    samples_per_gpu=4,
-    workers_per_gpu=2,
+    samples_per_gpu=18,
+    workers_per_gpu=4,
     train=dict(
         type=dataset_type,
         classes=classes,
@@ -107,3 +108,5 @@ data = dict(
         pipeline=test_pipeline,
         ann_file='fold0_val.pkl',
         ))
+
+fp16 = dict(loss_scale=512.)
