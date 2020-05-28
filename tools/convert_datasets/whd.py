@@ -30,6 +30,10 @@ def convert_to_mmdect_middle(df : pd.DataFrame):
             __, width, height, bbox, source = row_data
             # print(type(bbox))
             bbox = eval(bbox)  # convert str to list object
+            x, y, w, h = bbox
+            if w > width // 2 or h > height // 2:
+                # bad annotation
+                continue
 
             # https://github.com/open-mmlab/mmdetection/blob/master/docs/compatibility.md
             # 从0开始

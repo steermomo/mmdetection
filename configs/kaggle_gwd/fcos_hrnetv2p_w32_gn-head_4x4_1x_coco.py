@@ -94,7 +94,7 @@ tr_img_prefix = 'train'
 classes = None
 
 data = dict(
-    samples_per_gpu=5,
+    samples_per_gpu=3,
     workers_per_gpu=2,
     train=dict(
         type=dataset_type,
@@ -121,8 +121,16 @@ data = dict(
         ann_file='fold0_val.pkl',
         ))
 
-fp16 = dict(loss_scale=512.)
+# fp16 = dict(loss_scale=512.)
 
-evaluation = dict(interval=1, metric='mAP')
-lr_config = dict(step=[16, 22])
-total_epochs = 30
+evaluation = dict(interval=2, metric='mAP')
+lr_config = dict(step=[16, 24])
+total_epochs = 100
+
+# optimizer
+optimizer = dict(
+    lr=0.01, paramwise_cfg=dict(bias_lr_mult=2., bias_decay_mult=0.))
+optimizer_config = dict(
+    _delete_=True, grad_clip=dict(max_norm=35, norm_type=2))
+# learning policy
+lr_config = dict(warmup='constant')
