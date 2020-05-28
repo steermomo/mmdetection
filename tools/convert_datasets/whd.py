@@ -34,6 +34,12 @@ def convert_to_mmdect_middle(df : pd.DataFrame):
             if w > width // 2 or h > height // 2:
                 # bad annotation
                 continue
+            
+            # https://github.com/jwyang/faster-rcnn.pytorch/issues/136
+            # Getting Nan loss while training
+            if w < 3 or h < 3:
+                # print(f'find error in {image_id}, {width, height, bbox}')
+                continue
 
             # https://github.com/open-mmlab/mmdetection/blob/master/docs/compatibility.md
             # 从0开始
